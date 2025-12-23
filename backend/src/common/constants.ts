@@ -1,0 +1,4 @@
+export const CONSTANTS = {
+    FILE_SIZE_LIMIT: 107374182400, // 100GB
+    SHARE_TOKEN_LENGTH: 36, // UUID v4
+};

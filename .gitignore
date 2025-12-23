@@ -1,0 +1,12 @@
+# Add .env to gitignore if not already present
+.env
+.env.local
+.env.*.local
+
+# Docker volumes
+mongo-data/
+uploads/
+
+# Logs
+*.log
+npm-debug.log*
