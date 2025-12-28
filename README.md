@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# File Storage System
 
-## Getting Started
+A full-stack file management application with upload, folder organization, trash, and file sharing capabilities.
 
-First, run the development server:
+## Tech Stack
+
+- **Frontend:** Next.js 15, React 19, Tailwind CSS
+- **Backend:** NestJS, Mongoose
+- **Database:** MongoDB 7
+
+## Prerequisites
+
+- Docker & Docker Compose
+- Make (optional)
+
+## Development Setup
+
+### 1. Clone and configure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Start all services
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Using make
+make dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Or using docker compose directly
+docker compose -f docker-compose.dev.yml up
+```
 
-## Learn More
+### 3. Access the application
 
-To learn more about Next.js, take a look at the following resources:
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| Backend API | http://localhost:3001/api |
+| Mongo Express | http://localhost:8081 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Common Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+make dev              # Start with logs
+make up               # Start in background
+make down             # Stop all services
+make logs             # View all logs
+make logs-backend     # Backend logs only
+make logs-frontend    # Frontend logs only
+make shell-backend    # Shell into backend container
+make shell-frontend   # Shell into frontend container
+make db-shell         # MongoDB shell
+make clean            # Remove containers and volumes
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+.
+├── app/                  # Next.js frontend (App Router)
+├── backend/              # NestJS backend API
+│   └── src/
+│       ├── files/        # File management module
+│       ├── folders/      # Folder management module
+│       └── share/        # File sharing module
+├── docker/
+│   ├── mongo/            # MongoDB initialization
+│   └── nginx/            # Nginx config (production)
+├── public/               # Static assets
+└── docker-compose.dev.yml
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MONGO_ROOT_USERNAME` | root | MongoDB admin username |
+| `MONGO_ROOT_PASSWORD` | example | MongoDB admin password |
+| `BACKEND_PORT` | 3001 | Backend API port |
+| `NEXT_PUBLIC_API_BASE_URL` | http://localhost:3001 | API URL for frontend |

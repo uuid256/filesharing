@@ -38,57 +38,57 @@ help:
 
 # Development
 dev:
-	docker compose up
+	docker compose -f docker-compose.dev.yml up
 
 up:
-	docker compose up -d
+	docker compose -f docker-compose.dev.yml up -d
 
 down:
-	docker compose down
+	docker compose -f docker-compose.dev.yml down
 
 restart:
-	docker compose restart
+	docker compose -f docker-compose.dev.yml restart
 
 # Build
 build:
-	docker compose build
+	docker compose -f docker-compose.dev.yml build
 
 build-prod:
 	docker compose -f docker-compose.prod.yml build
 
 # Logs
 logs:
-	docker compose logs -f
+	docker compose -f docker-compose.dev.yml logs -f
 
 logs-backend:
-	docker compose logs -f backend
+	docker compose -f docker-compose.dev.yml logs -f backend
 
 logs-frontend:
-	docker compose logs -f frontend
+	docker compose -f docker-compose.dev.yml logs -f frontend
 
 logs-mongo:
-	docker compose logs -f mongo
+	docker compose -f docker-compose.dev.yml logs -f mongo
 
 # Shell access
 shell-backend:
-	docker compose exec backend sh
+	docker compose -f docker-compose.dev.yml exec backend sh
 
 shell-frontend:
-	docker compose exec frontend sh
+	docker compose -f docker-compose.dev.yml exec frontend sh
 
 db-shell:
-	docker compose exec mongo mongosh -u root -p example
+	docker compose -f docker-compose.dev.yml exec mongo mongosh -u root -p example
 
 # Status
 ps:
-	docker compose ps
+	docker compose -f docker-compose.dev.yml ps
 
 # Maintenance
 clean:
-	docker compose down -v --rmi all --remove-orphans
+	docker compose -f docker-compose.dev.yml down -v --rmi all --remove-orphans
 
 clean-volumes:
-	docker compose down -v
+	docker compose -f docker-compose.dev.yml down -v
 
 # Production
 prod:
@@ -102,7 +102,7 @@ prod-logs:
 
 # Testing
 test:
-	docker compose exec backend npm test
+	docker compose -f docker-compose.dev.yml exec backend npm test
 
 test-frontend:
-	docker compose exec frontend npm test
+	docker compose -f docker-compose.dev.yml exec frontend npm test
