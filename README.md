@@ -24,12 +24,10 @@ cp .env.example .env
 ### 2. Start all services
 
 ```bash
-# Using make
-make dev
-
-# Or using docker compose directly
 docker compose -f docker-compose.dev.yml up
 ```
+
+> **Note for Windows users:** The `make` commands listed below do not work on Windows. Use the `docker compose` commands directly instead.
 
 ### 3. Access the application
 
@@ -41,18 +39,18 @@ docker compose -f docker-compose.dev.yml up
 
 ## Common Commands
 
-```bash
-make dev              # Start with logs
-make up               # Start in background
-make down             # Stop all services
-make logs             # View all logs
-make logs-backend     # Backend logs only
-make logs-frontend    # Frontend logs only
-make shell-backend    # Shell into backend container
-make shell-frontend   # Shell into frontend container
-make db-shell         # MongoDB shell
-make clean            # Remove containers and volumes
-```
+| Action | Make (macOS/Linux) | Docker Compose (all platforms) |
+|--------|-------------------|-------------------------------|
+| Start with logs | `make dev` | `docker compose -f docker-compose.dev.yml up` |
+| Start in background | `make up` | `docker compose -f docker-compose.dev.yml up -d` |
+| Stop all services | `make down` | `docker compose -f docker-compose.dev.yml down` |
+| View all logs | `make logs` | `docker compose -f docker-compose.dev.yml logs -f` |
+| Backend logs | `make logs-backend` | `docker compose -f docker-compose.dev.yml logs -f backend` |
+| Frontend logs | `make logs-frontend` | `docker compose -f docker-compose.dev.yml logs -f frontend` |
+| Shell into backend | `make shell-backend` | `docker compose -f docker-compose.dev.yml exec backend sh` |
+| Shell into frontend | `make shell-frontend` | `docker compose -f docker-compose.dev.yml exec frontend sh` |
+| MongoDB shell | `make db-shell` | `docker compose -f docker-compose.dev.yml exec mongo mongosh -u root -p example` |
+| Clean up | `make clean` | `docker compose -f docker-compose.dev.yml down -v --rmi all` |
 
 ## Project Structure
 
